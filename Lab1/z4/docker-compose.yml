@@ -1,0 +1,32 @@
+version: '3.5'
+services:
+    x1:
+        image: sameersbn/squid:latest
+        volumes:
+            - ./x1.conf:/etc/squid/squid.conf
+        networks:
+            squid_net:
+               ipv4_address: 10.0.4.2
+
+    x2:
+        image: sameersbn/squid:latest
+        volumes:
+            - ./x2.conf:/etc/squid/squid.conf
+        networks:
+            squid_net:
+               ipv4_address: 10.0.4.3
+
+    x3:
+        image: sameersbn/squid:latest
+        volumes:
+            - ./x3.conf:/etc/squid/squid.conf
+        networks:
+            squid_net:
+               ipv4_address: 10.0.4.4
+
+networks:
+    squid_net:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 10.0.4.0/24
