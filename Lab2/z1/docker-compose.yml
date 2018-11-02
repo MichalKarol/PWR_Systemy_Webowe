@@ -1,0 +1,109 @@
+version: '3.5'
+services:
+    proxy:
+        image: sameersbn/squid:latest
+        volumes:
+            - ./proxy/proxy.conf:/etc/squid/squid.conf
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.2
+            projektanci_net:
+                ipv4_address: 192.168.2.2
+            sekretarka_net:
+                ipv4_address: 192.168.3.2
+
+    prezes_laptop:
+        image: appropriate/curl
+        mac_address: 08:00:27:84:24:BF
+        entrypoint: sh -c "echo 'To access docker exec -it z1_prezes_laptop_1 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.3
+
+    prezes_stacjonarny:
+        image: appropriate/curl
+        mac_address: 08:00:27:81:08:73
+        entrypoint: sh -c "echo 'To access docker exec -it z1_prezes_stacjonarny_1 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.4
+
+    manager1:
+        image: appropriate/curl
+        mac_address: 08:00:27:E7:D5:37
+        entrypoint: sh -c "echo 'To access docker exec -it z1_manager1_1 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.5
+
+    manager2:
+        image: appropriate/curl
+        mac_address: 08:00:27:82:59:C5
+        entrypoint: sh -c "echo 'To access docker exec -it z1_manager2_1 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.6
+
+    manager3:
+        image: appropriate/curl
+        mac_address: 08:00:27:C3:BE:B8
+        entrypoint: sh -c "echo 'To access docker exec -it z1_manager3 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.7
+
+    projektant:
+        image: appropriate/curl
+        entrypoint: sh -c "echo 'To access docker exec -it z1_projektant_1 sh';tail -f /dev/null"
+        networks:
+            projektanci_net:
+               ipv4_address: 192.168.2.3
+    
+    programista:
+        image: appropriate/curl
+        entrypoint: sh -c "echo 'To access docker exec -it z1_programista_1 sh';tail -f /dev/null"
+        networks:
+            projektanci_net:
+               ipv4_address: 192.168.2.4
+
+    admin:
+        image: appropriate/curl
+        mac_address: 08:00:27:EB:D7:94
+        entrypoint: sh -c "echo 'To access docker exec -it z1_admin_1 sh';tail -f /dev/null"
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.1.8
+
+    sekretarka:
+        image: appropriate/curl
+        entrypoint: sh -c "echo 'To access docker exec -it z1_sekretarka_1 sh';tail -f /dev/null"
+        networks:
+            sekretarka_net:
+               ipv4_address: 192.168.3.3
+    
+    ksiegowa: 
+        image: appropriate/curl
+        entrypoint: sh -c "echo 'To access docker exec -it z1_ksiegowa_1 sh';tail -f /dev/null"
+        networks:
+            sekretarka_net:
+               ipv4_address: 192.168.3.4
+
+
+networks:
+    squid_net_2:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 10.1.1.0/24
+
+    projektanci_net:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 192.168.2.0/24
+
+    sekretarka_net:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 192.168.3.0/24

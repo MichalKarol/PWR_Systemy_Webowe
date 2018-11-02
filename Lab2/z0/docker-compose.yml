@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+    proxy:
+        build: ./proxy/
+        volumes:
+            - ./proxy/proxy.conf:/etc/squid/squid.conf
+        networks:
+            squid_net_2:
+               ipv4_address: 10.1.0.2
+        cap_add:
+            - NET_ADMIN
+        
+
+networks:
+    squid_net_2:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 10.1.0.0/24
