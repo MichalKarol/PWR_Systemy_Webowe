@@ -15,6 +15,8 @@
      | eg. w zadaniu 0: `curl -x 10.0.0.2:3128 pics4learning.com`
  12) I powinna się pojawić zawartość strony pics4learning.com
 
+
+
 **Jak zacząć na Linuxie**
 ---------------------------
  1) Zainstaluj dockera
@@ -25,6 +27,19 @@
     | `curl -x 10.0.$(nr_zadania).$(nr_maszyny):3128 pics4learning.com`
  6) I powinna się pojawić zawartość strony pics4learning.com
 
+
+**Jak zacząć na Macu (by Paweł Janik)**
+---------------------------------------
+ 1) Zainstaluj dockera
+ 2) sudo pip install docker-compose
+ 3) Sklonuj lub ściągnij repo
+ 4) Przejdz do katalogu z zadaniem np. z0 > docker-compose up
+ 5) | `docker run -it --rm --network z$(nr_zadania)_squid_net appropriate/curl sh`
+    | eg. w zadaniu 0: `docker run -it --rm --network z0_squid_net appropriate/curl sh`
+ 6) | `curl -x 10.0.$(nr_zadania).$(nr_maszyny):3128 pics4learning.com`
+    | eg. w zadaniu 0: `curl -x 10.0.0.2:3128 pics4learning.com`
+ 7) I powinna się pojawić zawartość strony pics4learning.com 
+ 
 
 Dodatkowo
 ---------
