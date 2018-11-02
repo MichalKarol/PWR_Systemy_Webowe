@@ -1,9 +1,10 @@
 version: '3.5'
 services:
     proxy:
-        image: sameersbn/squid:latest
+        build: ./proxy/
         volumes:
             - ./proxy/proxy.conf:/etc/squid/squid.conf
+            - ./proxy/acl/:/etc/squid/acl/
         networks:
             squid_net_2:
                ipv4_address: 10.1.1.2
